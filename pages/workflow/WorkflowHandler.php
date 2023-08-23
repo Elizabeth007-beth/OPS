@@ -73,7 +73,8 @@ class WorkflowHandler extends PKPWorkflowHandler
             $submissionContext = Services::get('context')->get($submission->getContextId());
         }
 
-        $locales = $submissionContext->getSupportedSubmissionLocaleNames();
+        $locales = $submissionContext->getSupportedSubmissionLocaleNames() + [$submission->getData('locale') => (new \PKP\i18n\LocaleMetadata($submission->getData('locale')))->getDisplayName(null, false)];
+        ksort($locales);
         $locales = array_map(fn (string $locale, string $name) => ['key' => $locale, 'label' => $name], array_keys($locales), $locales);
 
         $latestPublication = $submission->getLatestPublication();
@@ -117,7 +118,7 @@ class WorkflowHandler extends PKPWorkflowHandler
                 }
             }
         }
-        $components[FORM_ISSUE_ENTRY] = $issueEntryForm->getConfig();
+        $components[FORM_ISSUE_ENTRY] = $this->getLocalizedForm($issueEntryForm, $submission, $submissionContext);
         $components[FORM_ID_RELATION] = $relationForm->getConfig();
 
         $publicationFormIds = $templateMgr->getState('publicationFormIds');

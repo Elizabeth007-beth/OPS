@@ -50,7 +50,9 @@ class Repository extends \PKP\submission\Repository
             $abstracts = $publication->getData('abstract');
             if ($abstracts) {
                 $abstractErrors = [];
-                foreach ($context->getSupportedSubmissionLocales() as $localeKey) {
+                $allowedLocales = $context->getSupportedSubmissionLocales();
+                in_array($locale, $allowedLocales) || array_push($allowedLocales, $locale);
+                foreach ($allowedLocales as $localeKey) {
                     $abstract = $publication->getData('abstract', $localeKey);
                     $wordCount = $abstract ? PKPString::getWordCount($abstract) : 0;
                     if ($wordCount > $section->getAbstractWordCount()) {

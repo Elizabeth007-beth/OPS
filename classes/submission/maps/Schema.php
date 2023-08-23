@@ -35,7 +35,10 @@ class Schema extends \PKP\submission\maps\Schema
             );
         }
 
-        $output = $this->schemaService->addMissingMultilingualValues($this->schemaService::SCHEMA_SUBMISSION, $output, $this->context->getSupportedSubmissionLocales());
+        $locales = $this->context->getSupportedSubmissionLocales();
+        in_array($primaryLocale = $submission->getData('locale'), $locales) || array_push($locales, $primaryLocale);
+
+        $output = $this->schemaService->addMissingMultilingualValues($this->schemaService::SCHEMA_SUBMISSION, $output, $locales);
 
         ksort($output);
 
