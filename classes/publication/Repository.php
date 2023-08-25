@@ -42,8 +42,9 @@ class Repository extends \PKP\publication\Repository
     {
         $errors = parent::validate($publication, $props, $submission, $context);
 
+        $primaryLocale = $submission->getData('locale');
         $allowedLocales = $context->getSupportedSubmissionLocales();
-        $primaryLocale = $submission->getLocale();
+        in_array($primaryLocale, $allowedLocales) || array_push($allowedLocales, $primaryLocale);
 
         // Ensure that the specified section exists
         $section = null;
