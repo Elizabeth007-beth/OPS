@@ -125,9 +125,6 @@ msgstr ""
 msgid "manager.setup"
 msgstr "Server Settings"
 
-msgid "manager.setup.editorialTeam"
-msgstr "Preprint Server Team"
-
 msgid "manager.setup.useStyleSheet"
 msgstr "Server style sheet"
 
@@ -266,13 +263,8 @@ msgstr ""
 msgid "manager.setup.contextTitle"
 msgstr "Server title"
 
-msgid "manager.setup.keyInfo"
-msgstr "Key Information"
-
-msgid "manager.setup.keyInfo.description"
-msgstr ""
-"Provide a description of your server and identify preprint manager(s) and "
-"other members of the preprint server team."
+msgid "manager.setup.editorialMasthead.description"
+msgstr "Please provide the editorial history of your server, including the full name, affiliation, and start and end dates of each editor."
 
 msgid "manager.setup.lists"
 msgstr "Lists"
